@@ -1,28 +1,38 @@
 <template>
     <div>
-        1111
+        {{userInfo}}
+        <hr>
+        {{userAll}}
     </div>
 </template>
 
 <script>
 import {getUserInfo} from 'network/getU.js'
+import {showUserAllInfo} from 'network/showUser.js'
     export default {
         name: "Home",
         data(){
             return{
-                userInfo:{}
+                userInfo:{},
+                userAll:[]
             }
         },
         methods:{
             getUser(){
                 getUserInfo().then(res=>{
-                    console.log(res);
+                    this.userInfo=res
                 })
 
+            },
+            showAllUser(){
+                showUserAllInfo().then(res=>{
+                   this.userAll=res
+                })
             }
         },
         mounted() {
             this.getUser()
+            this.showAllUser()
         }
     }
 </script>
