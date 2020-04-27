@@ -1,5 +1,5 @@
-# cqcfront
-
+# cqcfront  
+# Graduation project for front
 ## Project setup
 ```
 npm install
