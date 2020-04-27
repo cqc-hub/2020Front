@@ -1,7 +1,7 @@
 <template>
     <div id="home">
         <nav-bar class="home-nav">
-            <div slot="center">Home</div>
+            <div slot="center" ><b>Home</b></div>
         </nav-bar>
         <scroll class="content"
                 @position="scroll_position"
@@ -47,9 +47,9 @@
 
             },
             getUser(){
-                getUserInfo().then(res=>{
-                    this.userInfo=res
-                }).catch(err=>console.log('请求失败'+err))
+                // getUserInfo().then(res=>{
+                //     this.userInfo=res
+                // }).catch(err=>console.log('请求失败'+err))
 
             },
             showAllUser(){

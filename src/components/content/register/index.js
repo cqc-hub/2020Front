@@ -10,6 +10,6 @@ obj.install=function (Vue) { //vue.use()执行instal方法时会默认传入Vue
     reg.$mount(document.createElement('div'))
     //tost.$el就是上面创建的div了
     document.body.appendChild(reg.$el)
-    Vue.prototype.$register=reg
+    Vue.prototype.$toast=reg
 }
 export default obj
