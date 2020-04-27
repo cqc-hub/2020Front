@@ -6,7 +6,6 @@
 			<div>首页</div> -->
 			<div v-if="isActive"><slot name="item-icon-active" ></slot></div>
 			<div v-else><slot name="item-icon" ></slot></div>
-
 			<!-- <div :class="{active:isActive}"> -->
 			<div :style="activeStyle">
 				<slot name="item-text" ></slot>
