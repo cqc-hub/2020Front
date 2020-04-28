@@ -1,20 +1,15 @@
 <template>
-    <div id="home">
-        <div @click="showdata">
-            <nav-bar class="home-nav" >
-                <div slot="center"><b>Home</b></div>
-            </nav-bar>
-        </div>
+    <div id="evals">
+        <nav-bar class="eval-nav" >
+            <div slot="center"><b>Eval</b></div>
+        </nav-bar>
         <scroll class="content"
-                @position="scroll_position"
                 ref="scroll"
                 :probe-type="3"
                 :pullUpLoad="true"
                 :pull-up-load="true"
-                @pullingUp="loadMore">
-            <home-swiper :banners="banners" ></home-swiper>
-            <hr>
-            {{userAll}}
+                >
+            {{evalInfo}}
             <ul>
                 <li>1</li>
                 <li>2</li>
@@ -122,81 +117,52 @@
 </template>
 
 <script>
+    import {showEvals} from 'network/getU.js'
     import NavBar from "components/common/navbar/NavBar";
-    import {showUserAllInfo} from 'network/showUser.js'
-    import {showBannersInfo} from 'network/showBanners.js'
     import Scroll from "@/components/common/scroll/Scroll";
-    import HomeSwiper from "views/home/childrencomponents/HomeSwiper";
-    import {showLogin} from "common/login";
 
     export default {
-        name: "Home",
+        name: "Eval",
         data(){
             return{
-                user:{},
-                userAll:[],
-                banners:[]
+                evalInfo:[]
             }
         },
         components:{
             NavBar,
-            Scroll,
-            HomeSwiper
+            Scroll
         },
         methods:{
-
-            // swiperImgLoad(){
-            //   Object.keys(this.$store.state.user).length==0 ? showLogin():this.user=this.$store.state.user
-            //   this.$toast.isShow('请先登录',1500)
-            // },
-            loadMore(){},
-            scroll_position(position){
-
-            },
-            showAllUser(){
-                showUserAllInfo().then(res=>{
-                   this.userAll=res
+            getEvalInfo(){
+                showEvals().then(res=>{
+                    console.log(res);
+                    this.evalInfo=res
                 })
-            },
-            getBanners(){
-                showBannersInfo().then(res=>{
-                    // console.log(res);
-                    this.banners=res
-
-                })
-            },
-            showdata(){
-                const dd=(new Date()).getTime()
-                console.log(dd);
-            },
-        },
-        computed:{
-
+            }
         },
         mounted() {
-            this.showAllUser()
-            this.getBanners()
+            this.getEvalInfo()
         }
     }
 </script>
 
 <style scoped>
-    #home{
-        height: 100vh;
-        position: relative;
-    }
-    .content{
-        position: absolute;
-        top: 44px;
-        bottom: 49px;
-        right: 0;
-        left: 0;
-        overflow: hidden;
-    }
-    .home-nav{
+#evals{
+    height: 100vh;
+    width: 100vw;
+    background-color: rgba(0,0,0,.2);
+}
+    .eval-nav{
         background-color: var(--color-tint);
         color: white;
         font-weight: bolder;
-
     }
+.content{
+    position: absolute;
+    top: 44px;
+    bottom: 49px;
+    right: 0;
+    left: 0;
+    overflow: hidden;
+}
 </style>

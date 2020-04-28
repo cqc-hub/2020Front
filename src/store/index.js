@@ -1,5 +1,6 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
+import {mutations} from "./mutation/Mutations";
 
 Vue.use(Vuex)
 
@@ -7,12 +8,7 @@ export default new Vuex.Store({
   state: {
     user:{}
   },
-  mutations: {
-    saveUser(state,payload){
-      state.user=payload
-      console.log(state.user);
-    }
-  },
+  mutations,
   actions: {
   },
   modules: {

@@ -11,3 +11,9 @@ export function getUserInfo(uname,pwd) {
         }
     })
 }
+
+export function showEvals() {
+        return request({
+            url: "/evals"
+        })
+}

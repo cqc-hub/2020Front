@@ -11,10 +11,10 @@
 				<img src="~assets/img/tabbar/xitongguanli (1).svg" alt="" slot="item-icon-active">
 				<div slot='item-text'>分类</div>
 			</tab-bar-item>
-			<tab-bar-item path='/cart' activeColor='pink'>
+			<tab-bar-item path='/eval' activeColor='pink'>
 				<img src="~assets/img/tabbar/cart_empty.svg" alt="" slot="item-icon" >
 				<img src="~assets/img/tabbar/cart.svg" alt="" slot="item-icon-active">
-				<div slot='item-text'>购物车</div>
+				<div slot='item-text'>留言</div>
 			</tab-bar-item>
 			<tab-bar-item path='/profile' activeColor='deepPink'>
 				<img src="~assets/img/tabbar/yonghuguanli.svg" alt="" slot="item-icon" >
