@@ -3,6 +3,7 @@ import VueRouter from 'vue-router'
 const Home= () => import ('views/home/Home.vue')
 const Login=()=> import('views/login/Login.vue')
 const Eval=()=> import('views/eval/Eval.vue')
+const Profile=()=>import('views/profile/Profile')
 Vue.use(VueRouter)
 
   const routes = [
@@ -20,6 +21,9 @@ Vue.use(VueRouter)
     },{
       path:'/eval',
       component:Eval
+    },{
+      path:'/profile',
+      component:Profile
     }
 ]
 

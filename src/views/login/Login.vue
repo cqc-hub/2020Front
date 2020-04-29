@@ -42,7 +42,7 @@
                     if(Object.keys(res).length!=0){
                         this.$store.commit('saveUser',res)
                         this.$toast.isShow('登陆成功，'+res.uname+'欢迎回来',1500)
-                        this.$router.push('/home')
+                        this.$router.push('/profile')
                     }else {
                         this.$toast.isShow('用户名或密码错误',1500)
                     }

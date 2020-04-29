@@ -2,7 +2,7 @@
     <div id="home">
         <div @click="showdata">
             <nav-bar class="home-nav" >
-                <div slot="center"><b>Home</b></div>
+                <div slot="center"><b>首页</b></div>
             </nav-bar>
         </div>
         <scroll class="content"
@@ -13,6 +13,7 @@
                 :pull-up-load="true"
                 @pullingUp="loadMore">
             <home-swiper :banners="banners" ></home-swiper>
+            放news什么的
             <hr>
             {{userAll}}
             <ul>
@@ -118,6 +119,10 @@
                 <li>100</li>
             </ul>
         </scroll>
+        <back-top class="back-top" v-show="isShow"
+                  @click.native="backtop"
+                  :class="{backtopshow:isShow}">
+        </back-top>
     </div>
 </template>
 
@@ -128,6 +133,7 @@
     import Scroll from "@/components/common/scroll/Scroll";
     import HomeSwiper from "views/home/childrencomponents/HomeSwiper";
     import {showLogin} from "common/login";
+    import {backTop} from "@/common/mixin";
 
     export default {
         name: "Home",
@@ -143,6 +149,7 @@
             Scroll,
             HomeSwiper
         },
+        mixins:[backTop],
         methods:{
 
             // swiperImgLoad(){
@@ -151,7 +158,7 @@
             // },
             loadMore(){},
             scroll_position(position){
-
+                this.isShow=position.y<-300
             },
             showAllUser(){
                 showUserAllInfo().then(res=>{
@@ -176,6 +183,9 @@
         mounted() {
             this.showAllUser()
             this.getBanners()
+        },
+        activated() {
+            this.$refs.scroll.refresh()
         }
     }
 </script>
@@ -198,5 +208,8 @@
         color: white;
         font-weight: bolder;
 
+    }
+    .back-top{
+        z-index: 8;
     }
 </style>

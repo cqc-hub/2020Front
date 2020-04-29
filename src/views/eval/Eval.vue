@@ -1,13 +1,14 @@
 <template>
     <div id="evals">
         <nav-bar class="eval-nav" >
-            <div slot="center"><b>Eval</b></div>
+            <div slot="center"><b>留言板</b></div>
         </nav-bar>
         <scroll class="content"
                 ref="scroll"
                 :probe-type="3"
                 :pullUpLoad="true"
                 :pull-up-load="true"
+                @position="scroll_position"
                 >
             {{evalInfo}}
             <ul>
@@ -113,6 +114,10 @@
                 <li>100</li>
             </ul>
         </scroll>
+        <back-top class="back-top" v-show="isShow"
+                  @click.native="backtop"
+                  :class="{backtopshow:isShow}">
+        </back-top>
     </div>
 </template>
 
@@ -120,6 +125,7 @@
     import {showEvals} from 'network/getU.js'
     import NavBar from "components/common/navbar/NavBar";
     import Scroll from "@/components/common/scroll/Scroll";
+    import {backTop} from "@/common/mixin";
 
     export default {
         name: "Eval",
@@ -135,13 +141,19 @@
         methods:{
             getEvalInfo(){
                 showEvals().then(res=>{
-                    console.log(res);
                     this.evalInfo=res
                 })
+            },
+            scroll_position(position){
+                this.isShow=position.y<-300
             }
         },
         mounted() {
             this.getEvalInfo()
+        },
+        mixins:[backTop],
+        activated() {
+            this.$refs.scroll.refresh()
         }
     }
 </script>
