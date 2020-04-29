@@ -11,6 +11,7 @@
                 :pull-up-load="true"
                 @position="scroll_position"
                 >
+            <Eval-item v-for="item in evalInfo" :evalInfoItem="item"></Eval-item>
             {{evalInfo}}
             <ul>
                 <li>1</li>
@@ -127,7 +128,7 @@
     import NavBar from "components/common/navbar/NavBar";
     import Scroll from "@/components/common/scroll/Scroll";
     import {backTop} from "@/common/mixin";
-
+    import EvalItem from "./children/EvalItem";
     export default {
         name: "Eval",
         data(){
@@ -137,7 +138,8 @@
         },
         components:{
             NavBar,
-            Scroll
+            Scroll,
+            EvalItem
         },
         methods:{
             getEvalInfo(){
