@@ -6,8 +6,8 @@ export function getUserInfo(uname,pwd) {
         url: "/login",
         params:{
             leixin:'',
-            uname:uname,
-            pwd:pwd
+            uname,
+            pwd
         }
     })
 }
@@ -16,4 +16,18 @@ export function showEvals() {
         return request({
             url: "/evals"
         })
+}
+
+export function regUserInfo(uname,pwd,sex,age,birth) {
+    return request({
+        url: "/reg",
+        params:{
+            leixin:'',
+            uname,
+            pwd,
+            sex,
+            age,
+            birth
+        }
+    })
 }

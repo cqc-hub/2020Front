@@ -17,6 +17,7 @@
                 </label>
             </div>
             <div class="login-content"><button @click="userSubmit()">登陆</button></div>
+            <div class="login-content"><button @click="gouserReg()">注册</button></div>
         </div>
     </div>
 </template>
@@ -37,16 +38,23 @@
             }
         },
         methods:{
+            gouserReg(){
+                this.$router.push('/reg')
+            },
             userSubmit(){
-                getUserInfo(this.uname,this.pwd).then(res=>{
-                    if(Object.keys(res).length!=0){
-                        this.$store.commit('saveUser',res)
-                        this.$toast.isShow('登陆成功，'+res.uname+'欢迎回来',1500)
-                        this.$router.push('/profile')
-                    }else {
-                        this.$toast.isShow('用户名或密码错误',1500)
-                    }
-                })
+
+                    getUserInfo(this.uname,this.pwd).then(res=>{
+                        if(Object.keys(res).length!=0){
+                            this.$store.commit('saveUser',res)
+                            this.$toast.isShow('登陆成功，'+res.uname+'欢迎回来',1500)
+                            this.$router.push('/profile')
+                        }else {
+                            console.log(this.uname);
+                            this.uname=="" ? this.$toast.isShow('请填写用户名',1500) :this.$toast.isShow('用户名或密码错误',1500)
+
+                        }
+                    })
+
 
             },
             saveuname(){

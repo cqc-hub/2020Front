@@ -4,6 +4,8 @@ const Home= () => import ('views/home/Home.vue')
 const Login=()=> import('views/login/Login.vue')
 const Eval=()=> import('views/eval/Eval.vue')
 const Profile=()=>import('views/profile/Profile')
+const Reg=()=>import('views/reg/Reg')
+
 Vue.use(VueRouter)
 
   const routes = [
@@ -24,6 +26,9 @@ Vue.use(VueRouter)
     },{
       path:'/profile',
       component:Profile
+    },{
+      path:'/reg',
+      component:Reg
     }
 ]
 
