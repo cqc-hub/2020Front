@@ -3,19 +3,30 @@
         <nav-bar class="login-nav">
             <div slot="center" >登陆</div>
         </nav-bar>
-        <div class="content">
-            <div class="login-content">
-                <label for="uname">用户名:
-                    <input type="text" v-model="uname" id="uname" ref="uname" @input="saveuname" placeholder="请输入用户名" >
-                </label>
+        <div class="img"></div>
+        <div class="container">
+            <div class="suojin">
+                <div class="row">
+                    <div class="col-2"></div>
+                    <div class="col-3"><label for="uname">用户名:</label></div>
+                    <div class="col-7">
+                        <input type="text" class="form-control" v-model="uname" id="uname" ref="uname" @input="saveuname" placeholder="请输入用户名" >
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-2"></div>
+                    <div class="col-3"> <label for="pwd">密 码:</label></div>
+                    <div class="col-7">
+                        <input class="form-control" type="password" v-model="pwd" id="pwd" ref="pwd" @input="savepwd" placeholder="请输入密码">
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-3"></div>
+                    <div class="col-3"><button @click="userSubmit" class=" form-control">登陆</button></div>
+                    <div class="col-3"><button @click="gouserReg" class=" form-control">注册</button></div>
+
+                </div>
             </div>
-            <div class="login-content">
-                <label for="pwd">密码：
-                    <input type="password" v-model="pwd" id="pwd" ref="pwd" @input="savepwd" placeholder="请输入密码">
-                </label>
-            </div>
-            <div class="login-content"><button @click="userSubmit">登陆</button></div>
-            <div class="login-content"><button @click="gouserReg">注册</button></div>
         </div>
     </div>
 </template>
@@ -70,6 +81,16 @@
 </script>
 
 <style scoped>
+    .row{
+        padding-bottom: 10px;
+    }
+    .suojin{
+        padding-top: 100px;
+
+    }
+    [class *="col-3"]{
+        padding-top: 5px;
+    }
     .login-nav{
         background-color: var(--color-tint);
         color: white;
@@ -80,24 +101,16 @@
         position: relative;
         background-color: rgba(0,0,0,.03);
     }
-    .login-content{
-        position: relative;
-        border: #666666 solid 1px;
-        height: 30px;
-        margin-top: 10px;
-        flex: 0;
-    }
-    .content{
+    .img{
         position: absolute;
-        top: 20%;
-        left: 10%;
-        flex-wrap:wrap;
+        width: 100vw;
+        height: 100vh;
+        background: url("~assets/img/login/LoginImg.jpg")no-repeat;
+        background-size: cover;
+        background-position: center;
+        filter: blur(100px);
     }
-    .login-content input{
-        margin: 3px 0;
-    }
-    .login-content button{
-        width: 100%;
-        height: 100%;
-    }
+
+
+
 </style>

@@ -3,6 +3,7 @@
         <nav-bar class="eval-nav" >
             <div slot="center"><b>留言板</b></div>
         </nav-bar>
+        <div class="img"></div>
         <scroll class="content"
                 ref="scroll"
                 :probe-type="3"
@@ -163,6 +164,7 @@
     height: 100vh;
     width: 100vw;
     background-color: rgba(0,0,0,.2);
+    font-weight: bolder;
 }
     .eval-nav{
         background-color: var(--color-tint);
@@ -176,5 +178,15 @@
     right: 0;
     left: 0;
     overflow: hidden;
+}
+.img{
+    position: absolute;
+    width: 100vw;
+    height: 100vh;
+    background: url("~assets/img/login/LoginImg.jpg")no-repeat;
+    background-size: cover;
+    background-position: center;
+    filter: blur(100px);
+    z-index: -1;
 }
 </style>

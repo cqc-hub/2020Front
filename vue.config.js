@@ -1,7 +1,7 @@
+const webpack = require('webpack')
 module.exports={
     configureWebpack:{
         resolve:{
-
             extensions:[],
             alias:{
                 'assets':'@/assets',
@@ -13,5 +13,6 @@ module.exports={
 
             }
         }
+
     }
 }

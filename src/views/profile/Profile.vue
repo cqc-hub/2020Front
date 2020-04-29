@@ -3,6 +3,7 @@
         <nav-bar class="profile-nav" >
             <div slot="center"><b>个人信息</b></div>
         </nav-bar>
+        <div class="img"></div>
         <scroll class="content"
                 @position="scroll_position"
                 ref="scroll"
@@ -12,7 +13,6 @@
                 >
             <div v-if="!isLogin" >
                 <div @click="goLogin">
-                    <img  class="fixedimg" src="http://b266.photo.store.qq.com/psb?/V12wergp405FZy/62MyiGhAQlt1a.AxNDZqcHoawFbOOnQC8Mr1reSXgvc!/b/dAoBAAAAAAAA&bo=gAJaAwAAAAAFB*8!&rf=viewer_4&t=5" alt="">
                     <div class="forlogin"><div>还未登录，点击页面任意位置去登陆吧</div></div>
                 </div>
             </div>
@@ -121,7 +121,7 @@
         top: 40px;
         height: 100vh;
         left: 0;
-        width: 70px;
+        width: 180px;
         font-size: larger;
         font-weight: bolder;
     }
@@ -148,5 +148,14 @@
     .endLogin>div{
         padding-left: 8px;
         padding-top: 12px;
+    }
+    .img{
+        position: absolute;
+        width: 100vw;
+        height: 100vh;
+        background: url("~assets/img/login/LoginImg.jpg")no-repeat;
+        background-size: cover;
+        background-position: center;
+        filter: blur(100px);
     }
 </style>
