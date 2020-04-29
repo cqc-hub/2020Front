@@ -7,6 +7,7 @@ import VueLazyload from "vue-lazyload";
 Vue.config.productionTip = false
 Vue.use(register)
 Vue.use(VueLazyload)
+Vue.prototype.$bus=new Vue()
 new Vue({
   router,
   store,

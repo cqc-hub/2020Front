@@ -3,21 +3,19 @@
         <nav-bar class="login-nav">
             <div slot="center" >登陆</div>
         </nav-bar>
-        {{uname}}
-        {{pwd}}
         <div class="content">
             <div class="login-content">
                 <label for="uname">用户名:
-                    <input type="text" id="uname" ref="uname" @input="saveuname">
+                    <input type="text" v-model="uname" id="uname" ref="uname" @input="saveuname" placeholder="请输入用户名" >
                 </label>
             </div>
             <div class="login-content">
                 <label for="pwd">密码：
-                    <input type="password" id="pwd" ref="pwd" @input="savepwd">
+                    <input type="password" v-model="pwd" id="pwd" ref="pwd" @input="savepwd" placeholder="请输入密码">
                 </label>
             </div>
-            <div class="login-content"><button @click="userSubmit()">登陆</button></div>
-            <div class="login-content"><button @click="gouserReg()">注册</button></div>
+            <div class="login-content"><button @click="userSubmit">登陆</button></div>
+            <div class="login-content"><button @click="gouserReg">注册</button></div>
         </div>
     </div>
 </template>
@@ -25,11 +23,10 @@
 <script>
     import NavBar from "components/common/navbar/NavBar";
     import {getUserInfo} from 'network/getU.js'
-
     export default {
         name: "Login",
         components:{
-            NavBar,
+            NavBar
         },
         data(){
             return{
@@ -48,8 +45,9 @@
                             this.$store.commit('saveUser',res)
                             this.$toast.isShow('登陆成功，'+res.uname+'欢迎回来',1500)
                             this.$router.push('/profile')
+                            this.uname=''
+                            this.pwd=''
                         }else {
-                            console.log(this.uname);
                             this.uname=="" ? this.$toast.isShow('请填写用户名',1500) :this.$toast.isShow('用户名或密码错误',1500)
 
                         }
@@ -64,6 +62,9 @@
             savepwd(){
                 this.pwd=this.$refs.pwd.value
             }
+        },
+        activated() {
+            this.uname=this.$store.state.regName
         }
     }
 </script>

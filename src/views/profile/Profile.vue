@@ -28,8 +28,12 @@
                 <div class="scoreinfo" v-if="currentIndex==2">
                     baseinfo2
                 </div>
+
             </div>
         </scroll>
+        <div class="endLogin" @click="endLogin" v-show="isLogin">
+            <div>退出</div>
+        </div>
         <back-top class="back-top" v-show="isShow"
                   @click.native="backtop"
                   :class="{backtopshow:isShow}">
@@ -57,6 +61,12 @@
             BaseInfo
         },
         methods:{
+            endLogin(){
+                this.$store.commit('clareUser')
+                this.$nextTick(function () {
+                    this.$toast.isShow('退出登录成功',1500)
+                })
+            },
             TabControlClick(index){
                 this.currentIndex=index
             },
@@ -123,5 +133,20 @@
 
     table{
         height: 40vh;
+    }
+    .endLogin{
+        position: absolute;
+        bottom: 12%;
+        right: 3%;
+        width: 48px;
+        height: 48px;
+        background-color: rgba(0,0,0,.3);
+        border-radius: 100%;
+        font-size: 17px;
+        font-weight: bold;
+    }
+    .endLogin>div{
+        padding-left: 8px;
+        padding-top: 12px;
     }
 </style>

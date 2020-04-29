@@ -32,7 +32,7 @@
                     <input type="text" id="age" ref="age" @input="saveage">
                 </label>
             </div>
-            <div v-show="ageErr" class="errShow">请合理填写年龄</div>
+            <div v-show="ageErr" class="errShow" aria-required="true">请合理填写年龄</div>
             <div class="login-content">
                 <label for="birth">生日：
                     <input type="text" id="birth" ref="birth" @input="savebirth">
@@ -69,6 +69,7 @@
                 // console.log(this.totalErr);
                 this.totalErr ? regUserInfo(this.uname,this.pwd,this.sex,this.age,this.birth).then(res=>{
                     this.$toast.isShow('注册成功，快去登陆吧',1500)
+                    this.$store.commit('saveRegName',this.uname)
                     this.$router.push('/login')
                 }).catch(err=>console.log(err)):this.$toast.isShow('请完整注册信息',1500)
             },
