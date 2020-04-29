@@ -31,3 +31,15 @@ export function regUserInfo(uname,pwd,sex,age,birth) {
         }
     })
 }
+//http://localhost:8080/swin/reviseEvals?uname=吕布&create=1588179170444&eval=轻轻松松第一名&uid=21
+export function reviseEvals(uname,create,eval1,uid) {
+    return request({
+        url: "/reviseEvals",
+        params:{
+            uname,
+            create,
+            eval:eval1,
+            uid
+        }
+    })
+}

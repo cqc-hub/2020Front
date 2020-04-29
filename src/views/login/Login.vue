@@ -62,6 +62,9 @@
                             this.uname=="" ? this.$toast.isShow('请填写用户名',1500) :this.$toast.isShow('用户名或密码错误',1500)
 
                         }
+                    }).catch(err=>{
+                        this.$toast.isShow('登陆失败,请检查网络',1500)
+
                     })
 
 

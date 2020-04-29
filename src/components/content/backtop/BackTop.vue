@@ -19,7 +19,7 @@
 	div{
 		position: fixed;
 		right: 7px;
-		bottom: 69px;
+		bottom: 105px;
 	}
 	.backtopshow{
 		animation: backtopshow 0.3s linear;

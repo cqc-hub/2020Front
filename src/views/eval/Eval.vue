@@ -116,6 +116,7 @@
                 <li>100</li>
             </ul>
         </scroll>
+        <Eval-send-msg class="sendmsg" @refreshEval="refreshEval"></Eval-send-msg>
         <back-top class="back-top" v-show="isShow"
                   @click.native="backtop"
                   :class="{backtopshow:isShow}">
@@ -129,6 +130,7 @@
     import Scroll from "@/components/common/scroll/Scroll";
     import {backTop} from "@/common/mixin";
     import EvalItem from "./children/EvalItem";
+    import EvalSendMsg from "./children/EvalSendMsg";
     export default {
         name: "Eval",
         data(){
@@ -139,9 +141,13 @@
         components:{
             NavBar,
             Scroll,
-            EvalItem
+            EvalItem,
+            EvalSendMsg
         },
         methods:{
+            refreshEval(){
+                this.getEvalInfo()
+            },
             getEvalInfo(){
                 showEvals().then(res=>{
                     this.evalInfo=res
@@ -162,6 +168,13 @@
 </script>
 
 <style scoped>
+    .sendmsg{
+        position: fixed;
+        bottom: 49px;
+        left: 0;
+        right: 0;
+
+    }
 #evals{
     height: 100vh;
     width: 100vw;
@@ -176,7 +189,7 @@
 .content{
     position: absolute;
     top: 44px;
-    bottom: 49px;
+    bottom: 79px;
     right: 0;
     left: 0;
     overflow: hidden;
