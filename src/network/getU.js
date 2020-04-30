@@ -51,3 +51,13 @@ export function lookforuser(uname) {
         }
     })
 }
+//http://localhost:8080/swin/changepwd?uid=1&newPwd=123
+export function changepwd(uid,newPwd) {
+    return request({
+        url: "/changepwd",
+        params:{
+            uid,
+            newPwd
+        }
+    })
+}
