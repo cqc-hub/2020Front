@@ -4,7 +4,7 @@
             <div class="col-10">
                 <textarea class="form-control" placeholder="请先登录在留言" ref="liuyan"></textarea>
             </div>
-            <div class="col-2"><button class="btn btn-info btntn" @click="sendMsg(liuyan)">发送</button></div>
+            <div class="col-2"><button class="btn btn-info btntn" @click="sendMsg">发送</button></div>
         </div>
 
     </div>
@@ -15,9 +15,14 @@
     export default {
         name: "EvalSendMsg",
         methods:{
-            sendMsg(liuyan){
+            sendMsg(){
+                let liuyan=this.$refs.liuyan.value
                 if (Object.keys(this.$store.state.user).length!=0){
-                    this.sendLiuyan(liuyan)
+                    if (this.$refs.liuyan.value==''){
+                        this.$toast.isShow('请输入内容',1500)
+                    }else{
+                        this.sendLiuyan(liuyan)
+                    }
                 }else {
                     this.$toast.isShow('请先登录',1500)
                 }
@@ -28,8 +33,9 @@
                 const uid=this.$store.state.user.uid
                 // console.log(liuyan,create, uname, uid);
                 reviseEvals(uname,create,liuyan,uid).then(res=>{
-                    this.$refs.liuyan.value=''
                     this.$toast.isShow('留言成功',1500)
+                    this.$refs.liuyan.value=''
+                    const _this=this
                     this.$emit('refreshEval')
                 })
             }
@@ -38,6 +44,11 @@
             liuyan(){
                 return this.$refs.liuyan.value
             }
+        },
+        mounted() {
+
+        },
+        deactivated() {
         }
     }
 </script>

@@ -135,7 +135,14 @@
         name: "Eval",
         data(){
             return{
-                evalInfo:[]
+                evalInfo:[],
+                refreshTimer:function () {
+                    const f=this.getEvalInfo
+                    setInterval(()=>{
+                        f()
+                        // console.log('refresh');
+                    },3000)
+                }
             }
         },
         components:{
@@ -147,6 +154,7 @@
         methods:{
             refreshEval(){
                 this.getEvalInfo()
+                this.refreshTimer()
             },
             getEvalInfo(){
                 showEvals().then(res=>{
@@ -155,14 +163,22 @@
             },
             scroll_position(position){
                 this.isShow=position.y<-300
+            },
+            clearT(){
+                clearTimeout(this.refreshTimer)
+                // console.log('clear');
             }
         },
         mounted() {
             this.getEvalInfo()
+            // console.log(this.refreshTimer);
         },
         mixins:[backTop],
         activated() {
             this.$refs.scroll.refresh()
+        },
+        deactivated() {
+            this.clearT()
         }
     }
 </script>
