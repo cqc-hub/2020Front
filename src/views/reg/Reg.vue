@@ -15,13 +15,14 @@
                 <div class="col-1"></div>
                 <div class="col-3"><label for="uname">用户名:</label></div>
                 <div class="col-7">
-                    <input type="text" id="uname" ref="uname" @input="saveuname" class="form-control" placeholder="输入用户名">
+                    <input v-model="uname"  type="text" id="uname" ref="uname" @input="saveuname" class="form-control" placeholder="输入用户名">
                 </div>
             </div>
                 <div class="row">
                     <div class="col-1"></div>
                     <div class="col-3"></div>
                     <div v-show="unameLenErr" class="errShow ">用户名不能为空</div>
+                    <div v-show="userRepeat" class="errShow ">用户名已存在</div>
                 </div>
                 <div class="row">
                     <div class="col-1"></div>
@@ -101,9 +102,9 @@
 
 <script>
     import NavBar from "components/common/navbar/NavBar";
-    import {regUserInfo} from 'network/getU.js'
+    import {regUserInfo,lookforuser} from 'network/getU.js'
     import Scroll from "@/components/common/scroll/Scroll";
-
+    import {debounce} from 'common/utils'
     export default {
         name: "Reg",
         components:{
@@ -119,7 +120,8 @@
                 sex:'男',
                 age:0,
                 birth:'10/10',
-                pwdLenErr:true
+                pwdLenErr:true,
+                userRepeat:false
             }
         },
         methods:{
@@ -145,9 +147,14 @@
                 this.sex=this.$refs.sex1.value
             },
             saveuname(){
+                lookforuser(this.$refs.uname.value).then(res=>{
+                    this.userRepeat=res
+                    // console.log(this.userRepeat);
+                })
                 // console.log(this.$refs.uname.value);
-                this.uname=this.$refs.uname.value
+
             },
+
             savepwd(){
                 this.pwdLenErr=this.$refs.pwd1.value.length<3
                 if(this.$refs.pwd1.value==this.$refs.pwd.value){
@@ -166,14 +173,14 @@
                 return !(this.age>0 && this.age<=150)
             },
             totalErr(){
-                return (this.ageErr==false && this.showErr==false && this.pwdLenErr==false && this.unameLenErr==false)
+                return (this.ageErr==false && this.showErr==false && this.pwdLenErr==false && this.unameLenErr==false &&this.userRepeat==false)
             },
             unameLenErr(){
                 return this.uname.length<=0
             }
         },
-        deactivated() {
-
+        created:function () {
+            this.saveuname=debounce(this.saveuname,500)
         }
     }
 </script>

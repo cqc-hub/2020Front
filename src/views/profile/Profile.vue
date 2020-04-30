@@ -22,10 +22,10 @@
                />
                 <base-info :currentIndex="currentIndex" :user="user"></base-info>
                 <div class="editinfo" v-if="currentIndex==1">
-                    baseinfo1
+                    <Edit-info></Edit-info>
                 </div>
                 <div class="scoreinfo" v-if="currentIndex==2">
-                    baseinfo2
+                    <Show-score :user="user"></Show-score>
                 </div>
 
             </div>
@@ -46,6 +46,8 @@
     import {backTop} from "@/common/mixin";
     import TabControl from "components/content/tabcontrol/TabControl";
     import BaseInfo from "./children/BaseInfo";
+    import EditInfo from "./children/EditInfo";
+    import ShowScore from "./children/ShowScore";
     export default {
         name: "Profile",
         data(){
@@ -57,7 +59,9 @@
             NavBar,
             Scroll,
             TabControl,
-            BaseInfo
+            BaseInfo,
+            EditInfo,
+            ShowScore
         },
         methods:{
             endLogin(){
@@ -95,7 +99,7 @@
 
 <style scoped>
     #profile{
-        background-color: #ffffff;
+        background-color: rgba(248, 37, 83, 0.9);
     }
     .profile-nav{
         background-color: var(--color-tint);

@@ -43,3 +43,11 @@ export function reviseEvals(uname,create,eval1,uid) {
         }
     })
 }
+export function lookforuser(uname) {
+    return request({
+        url: "/lookforuser",
+        params:{
+            uname
+        }
+    })
+}
