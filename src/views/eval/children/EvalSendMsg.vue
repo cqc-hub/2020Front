@@ -25,6 +25,9 @@
                     }
                 }else {
                     this.$toast.isShow('请先登录',1500)
+                    setTimeout(()=>{
+                        this.$router.push('/login')
+                    },1500)
                 }
             },
             sendLiuyan(liuyan){

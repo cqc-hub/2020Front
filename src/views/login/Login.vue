@@ -3,7 +3,7 @@
         <nav-bar class="login-nav">
             <div slot="center" >登陆</div>
         </nav-bar>
-        <div class="img"></div>
+
         <div class="container">
             <div class="suojin">
                 <div class="row">
@@ -28,6 +28,7 @@
                 </div>
             </div>
         </div>
+        <div class="img"></div>
     </div>
 </template>
 

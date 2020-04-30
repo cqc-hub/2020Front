@@ -3,7 +3,6 @@
         <nav-bar class="profile-nav" >
             <div slot="center"><b>个人信息</b></div>
         </nav-bar>
-        <div class="img"></div>
         <scroll class="content"
                 @position="scroll_position"
                 ref="scroll"

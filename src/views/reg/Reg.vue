@@ -3,7 +3,6 @@
         <nav-bar class="reg-nav">
             <div slot="center" >注册</div>
         </nav-bar>
-        <div class="img"></div>
         <scroll class="content"
                 @position="scroll_position"
                 ref="scroll"
@@ -93,7 +92,10 @@
                     </div>
                 </div>
 
-            </div></scroll>
+            </div>
+        </scroll>
+        <div class="img"></div>
+
     </div>
 </template>
 

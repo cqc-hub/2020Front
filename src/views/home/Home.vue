@@ -5,7 +5,6 @@
                 <div slot="center"><b>首页</b></div>
             </nav-bar>
         </div>
-        <div class="img"></div>
         <scroll class="content"
                 @position="scroll_position"
                 ref="scroll"
@@ -100,6 +99,7 @@
     #home{
         height: 100vh;
         position: relative;
+        background-color: rgba(0,0,0,.05);
     }
     .content{
         position: relative;
@@ -116,14 +116,5 @@
     }
     .back-top{
         z-index: 8;
-    }
-    .img{
-        position: absolute;
-        width: 100vw;
-        height: 100vh;
-        background: url("~assets/img/login/LoginImg.jpg")no-repeat;
-        background-size: cover;
-        background-position: center;
-        filter: blur(100px);
     }
 </style>

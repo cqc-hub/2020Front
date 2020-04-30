@@ -15,20 +15,25 @@ Vue.use(VueRouter)
     },
     {
       path:'/home',
-      component:Home
+      component:Home,
+      meta: { index: 1 }
     },
     {
       path:'/login',
-      component:Login
+      component:Login,
+      meta: { index: 4 }
     },{
       path:'/eval',
-      component:Eval
+      component:Eval,
+      meta: { index: 2 }
     },{
       path:'/profile',
-      component:Profile
+      component:Profile,
+      meta: { index: 3 }
     },{
       path:'/reg',
-      component:Reg
+      component:Reg,
+      meta: { index: 5 }
     }
 ]
 
