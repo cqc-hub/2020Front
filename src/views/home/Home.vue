@@ -14,11 +14,11 @@
                 @pullingUp="loadMore">
             <home-swiper :banners="banners" ></home-swiper>
             <Home-rules></Home-rules>
-            <div>
-                            {{userAll}}
-                            放news什么的
-            </div>
             <div class="container">
+                <div>
+                    {{userAll}}
+                    放news什么的
+                </div>
             </div>
         </scroll>
         <back-top class="back-top" v-show="isShow"

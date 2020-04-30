@@ -6,7 +6,6 @@
             </div>
             <div class="col-2"><button class="btn btn-info btntn" @click="sendMsg">发送</button></div>
         </div>
-
     </div>
 </template>
 

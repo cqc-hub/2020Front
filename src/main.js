@@ -6,6 +6,8 @@ import register from './components/content/register/index'
 import VueLazyload from "vue-lazyload";
 import $ from 'jquery'
 import 'font-awesome/css/font-awesome.css'
+import echarts from 'echarts'
+Vue.prototype.$echarts = echarts
 Vue.config.productionTip = false
 Vue.use(register)
 Vue.use(VueLazyload)

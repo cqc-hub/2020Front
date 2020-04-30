@@ -6,10 +6,10 @@
 				<img src="~assets/img/tabbar/shouye (1).svg" alt="" slot="item-icon-active">
 				<div slot='item-text'>首页</div>
 			</tab-bar-item>
-			<tab-bar-item path='/category'>
+			<tab-bar-item path='/editinfo' v-if="showEditInfo">
 				<img src="~assets/img/tabbar/xitongguanli.svg" alt="" slot="item-icon" >
 				<img src="~assets/img/tabbar/xitongguanli (1).svg" alt="" slot="item-icon-active">
-				<div slot='item-text'>分类</div>
+				<div slot='item-text'>信息管理</div>
 			</tab-bar-item>
 			<tab-bar-item path='/eval' activeColor='pink'>
 				<img src="~assets/img/tabbar/cart_empty.svg" alt="" slot="item-icon" >
@@ -28,12 +28,16 @@
 <script>
 	import TabBar from 'components/common/tabbar/TabBar.vue'
 	import TabBarItem from 'components/common/tabbar/TabBarItem.vue'
-
 	export default{
 		name:'MainTabBar',
 		components:{
 			TabBar,
 			TabBarItem
+		},
+		computed:{
+			showEditInfo(){
+				return Object.keys(this.$store.state.user).length>0 && this.$store.state.user.qx>0
+			}
 		}
 	}
 </script>

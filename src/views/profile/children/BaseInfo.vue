@@ -1,5 +1,5 @@
 <template>
-    <div id="baseinfo" v-if="currentIndex==0">
+    <div id="baseinfo" v-if="currentIndex==0" class="container">
         <table border="2" cellpadding="10" cellspacing="5" frame="border" width="100%" class="table table-bordered">
             <tr class="table-active">
                 <th>id</th>
