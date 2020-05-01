@@ -61,3 +61,22 @@ export function changepwd(uid,newPwd) {
         }
     })
 }
+//http://localhost:8080/swin/changebir?uid=1&newBir=5/5
+export function changebir(uid,newBir) {
+    return request({
+        url: "/changebir",
+        params:{
+            uid,
+            newBir
+        }
+    })
+}
+export function changeage(uid,newAge) {
+    return request({
+        url: "/changeage",
+        params:{
+            uid,
+            newAge
+        }
+    })
+}

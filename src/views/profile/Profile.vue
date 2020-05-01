@@ -1,5 +1,5 @@
 <template>
-    <div id="profile">
+    <div id="profile" >
         <nav-bar class="profile-nav" >
             <div slot="center"><b>个人信息</b></div>
         </nav-bar>
@@ -11,8 +11,12 @@
                 :pull-up-load="true"
                 >
             <div v-if="!isLogin" >
-                <div @click="goLogin">
-                    <div class="forlogin"><div>还未登录，点击页面任意位置去登陆吧</div></div>
+                <div>
+                    <div class="alert alert-warning alert-dismissible pppp" role="alert">
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <strong class="lead"><b>未登录!</b></strong> 请先登录(点击图片进行登陆)
+                    </div>
+                    <img src="~assets/img/lazyload.jpg" alt="" @click="goLogin" class="imgStyforlogin">
                 </div>
             </div>
             <div v-else>
@@ -98,6 +102,16 @@
 </script>
 
 <style scoped>
+    .imgStyforlogin{
+        width: 170vw;
+        height:600px;
+    }
+    .pppp{
+        position: absolute;
+        left: 0;
+        right: 0;
+        height: 44px;
+    }
     #profile{
         background-color: rgba(248, 37, 83, 0.9);
     }
@@ -127,11 +141,6 @@
         width: 180px;
         font-size: larger;
         font-weight: bolder;
-    }
-    .forlogin div{
-        border-top: rgba(0,0,0,.6) solid 3px;
-        border-right: rgba(0,0,0,.6) solid 3px;
-        border-bottom: rgba(0,0,0,.6) solid 3px;
     }
 
     table{

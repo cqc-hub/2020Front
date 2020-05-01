@@ -3,6 +3,10 @@
         <nav-bar class="edit-nav" >
             <div slot="center"><b>信息管理</b></div>
         </nav-bar>
+        <tab-control :titles="qx"
+                     @TabControlClick="TabControlClick"
+                     ref="tabControl"
+        />
         <scroll class="content"
                 @position="scroll_position"
                 ref="scroll"
@@ -10,7 +14,9 @@
                 :pullUpLoad="true"
                 :pull-up-load="true"
                 >
-            <Show-all-swimmer :userAll="userFilter"></Show-all-swimmer>
+            <Show-all-swimmer :userAll="userFilter" v-if="this.currentIndex==0"></Show-all-swimmer>
+            <QX v-if="this.currentIndex==1"></QX>
+            <hr>
         </scroll>
     </div>
 </template>
@@ -20,19 +26,28 @@
     import Scroll from "@/components/common/scroll/Scroll";
     import {showUserAllInfo} from 'network/showUser.js'
     import ShowAllSwimmer from "./chileren/ShowAllSwimmer";
+    import TabControl from "components/content/tabcontrol/TabControl";
+    import QX from "./chileren/QX";
     export default {
         name: "EditInfo",
         data(){
             return{
                 userAll:[],
+                currentIndex:0
+
             }
         },
         components:{
             NavBar,
             Scroll,
-            ShowAllSwimmer
+            ShowAllSwimmer,
+            TabControl,
+            QX
         },
         methods:{
+            TabControlClick(index){
+                this.currentIndex=index
+            },
             scroll_position(position){},
             showAllUser(){
                 showUserAllInfo().then(res=>{
@@ -52,6 +67,9 @@
                 return this.userAll.filter(item=>{
                     return item.qx<1
                 })
+            },
+            qx(){
+               return this.$store.state.user.qx==2 ? ['运动员信息管理','用户权限管理'] : ['运动员信息管理']
             }
         }
     }
@@ -68,7 +86,7 @@
         position: relative;
         top: 0;
         /*height: 100vh;*/
-        height: calc(100% - 44px - 49px);
+        height: calc(100% - 44px - 49px - 40px);
         overflow: hidden;
     }
     .edit-nav{
