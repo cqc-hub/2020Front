@@ -3,11 +3,9 @@
             <div class="container-fluid">
                 <table class="table table-bordered " style="text-align: center">
                     <tr class="table-info">
-                       
-
-
                     </tr>
                 </table>
+
                 <Swimmer-item v-for="item in userAll" :Swimmer="item"></Swimmer-item>
             </div>
     </div>
@@ -37,5 +35,7 @@
 </script>
 
 <style scoped>
-
+[class *="col-"]{
+    text-align: center;
+}
 </style>

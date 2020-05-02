@@ -88,3 +88,40 @@ export function delUser(uid) {
         }
     })
 }
+//http://localhost:8080/swin/changeScore3?score3=100&uid=1
+export function changeScore3(uid,score3) {
+    return request({
+        url: "/changeScore3",
+        params:{
+            uid,
+            score3
+        }
+    })
+}
+export function changeScore2(uid,score2) {
+    return request({
+        url: "/changeScore2",
+        params:{
+            uid,
+            score2
+        }
+    })
+}
+export function changeScore1(uid,score1) {
+    return request({
+        url: "/changeScore1",
+        params:{
+            uid,
+            score1
+        }
+    })
+}
+export function changeBodyhel(uid,newbodyhel) {
+    return request({
+        url: "/changeBodyhel",
+        params:{
+            uid,
+            newbodyhel
+        }
+    })
+}

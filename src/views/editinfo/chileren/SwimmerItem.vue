@@ -2,6 +2,11 @@
     <div id="swimmeritem">
         <table class="table  " style="text-align: center">
             <div class="row">
+                <div class="col-3">id/name</div>
+                <div class="col-3">score</div>
+                <div class="col-6">教练建议</div>
+            </div>
+            <div class="row">
                 <div class="col-1 ">
                     <td>{{Swimmer.uid}}</td>
                </div>
@@ -17,7 +22,7 @@
                 <div class="col-1 ">
                     <td>{{Swimmer.score3}}</td>
                </div>
-                <div class="col-6 ">
+                <div class="col-6 " >
                     <td>{{Swimmer.bodyhel}}</td>
                </div>
             </div>
@@ -32,7 +37,7 @@
                                     <input type="text" class="form-control" placeholder="项目一成绩" v-model="score1">
                                 </div>
                                 <div class="col-3">
-                                    <button class="form-control" >save</button>
+                                    <button class="form-control" @click="saveScore1">save</button>
                                 </div>
                             </div>
                             <div class="row">
@@ -40,7 +45,7 @@
                                     <input type="text" class="form-control" placeholder="项目二成绩" v-model="score2">
                                 </div>
                                 <div class="col-3">
-                                    <button class="form-control">save</button>
+                                    <button class="form-control" @click="saveScore2">save</button>
                                 </div>
                             </div>
                             <div class="row">
@@ -48,13 +53,13 @@
                                     <input type="text" class="form-control" placeholder="项目三成绩" v-model="score3">
                                 </div>
                                 <div class="col-3">
-                                    <button class="form-control">save</button>
+                                    <button class="form-control" @click="saveScore3">save</button>
                                 </div>
                             </div>
                         </div>
                         <div class="list-group-item ">
-                            <textarea name="" id="" cols="30" rows="5" class="form-control fff" placeholder="对该用户建议"></textarea>
-                            <button class="btn btn-block">save</button>
+                            <textarea name="" id="" cols="30" rows="5" class="form-control fff" placeholder="对该用户建议" v-model="newbodyhel"></textarea>
+                            <button class="btn btn-block" @click="saveBodyhel">save</button>
                         </div>
                         <div class="list-group-item" v-if="this.$store.state.user.qx==2">
                             <li class="list-group-item" @click="showedel"><div class="suojinitem">注销该用户</div></li>
@@ -79,7 +84,13 @@
 
 <script>
     import $ from 'jquery'
-    import {delUser} from 'network/getU.js'
+    import {
+        delUser,
+        changeBodyhel,
+        changeScore1,
+        changeScore2,
+        changeScore3
+    } from 'network/getU.js'
 
     export default {
         name: "SwimmerItem",
@@ -96,10 +107,53 @@
             return{
                 score1:'',
                 score2:'',
-                score3:''
+                score3:'',
+                newbodyhel:''
             }
         },
         methods:{
+            saveScore1(){
+                if (this.score1==''){
+                    this.$toast.isShow('不能为空',1500)
+                }else{
+                    isNaN(this.score1) ? this.$toast.isShow('请输入数字',1500):changeScore1(this.Swimmer.uid,this.score1).then(res=>{
+                        res ? this.$toast.isShow('修改成功',1500) : this.$toast.isShow('修改失败',1500)
+                    }).catch(
+                        this.$toast.isShow('请输入数字',1500)
+                    )
+                }
+            },
+            saveScore2(){
+                if (this.score2==''){
+                    this.$toast.isShow('不能为空',1500)
+                }else{
+                    isNaN(this.score2) ? this.$toast.isShow('请输入数字',1500):changeScore2(this.Swimmer.uid,this.score2).then(res=>{
+                        res ? this.$toast.isShow('修改成功',1500) : this.$toast.isShow('修改失败',1500)
+                    }).catch(
+                        this.$toast.isShow('请输入数字',1500)
+                    )
+                }
+            },
+            saveScore3(){
+                if (this.score3==''){
+                    this.$toast.isShow('不能为空',1500)
+                }else{
+                    isNaN(this.score3) ? this.$toast.isShow('请输入数字',1500):changeScore3(this.Swimmer.uid,this.score3).then(res=>{
+                        res ? this.$toast.isShow('修改成功',1500) : this.$toast.isShow('修改失败',1500)
+                    }).catch(
+                        this.$toast.isShow('请输入数字',1500)
+                    )
+                }
+            },
+            saveBodyhel(){
+                if (this.newbodyhel==''){
+                    this.$toast.isShow('不能为空',1500)
+                }else{
+                    changeBodyhel(this.Swimmer.uid,this.newbodyhel).then(res=>{
+                        res ? this.$toast.isShow('修改成功',1500) : this.$toast.isShow('修改失败',1500)
+                    })
+                }
+            },
             showedit(){
                 $(this.$refs.showEdit).slideToggle()
                 this.$bus.$emit('scrollRefresh')
