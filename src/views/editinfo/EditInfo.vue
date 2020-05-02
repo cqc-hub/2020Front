@@ -1,7 +1,7 @@
 <template>
     <div id="editinfo">
         <nav-bar class="edit-nav" >
-            <div slot="center"><b>信息管理</b></div>
+            <div slot="center" @click="aaa"><b>信息管理</b></div>
         </nav-bar>
         <tab-control :titles="qx"
                      @TabControlClick="TabControlClick"
@@ -28,6 +28,7 @@
     import ShowAllSwimmer from "./chileren/ShowAllSwimmer";
     import TabControl from "components/content/tabcontrol/TabControl";
     import QX from "./chileren/QX";
+    import $ from 'jquery'
     export default {
         name: "EditInfo",
         data(){
@@ -45,6 +46,12 @@
             QX
         },
         methods:{
+            aaa(){
+                $(document.querySelectorAll('#showEdit')).slideUp()
+                this.$nextTick(function () {
+                    this.$refs.scroll.refresh()
+                })
+            },
             TabControlClick(index){
                 this.currentIndex=index
             },
@@ -60,7 +67,14 @@
             },
         },
         mounted() {
+            const _this=this
             this.showAllUser()
+            this.$bus.$on('scrollRefresh',()=>{
+                _this.$refs.scroll.refresh()
+            })
+            this.$bus.$on('refreshUsers',()=>{
+                _this.showAllUser()
+            })
         },
         computed:{
             userFilter(){

@@ -80,3 +80,11 @@ export function changeage(uid,newAge) {
         }
     })
 }
+export function delUser(uid) {
+    return request({
+        url: "/deluser",
+        params:{
+            uid
+        }
+    })
+}

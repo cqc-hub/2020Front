@@ -1,4 +1,4 @@
-const webpack = require('webpack')
+var webpack = require('webpack')
 module.exports={
     configureWebpack:{
         resolve:{
@@ -14,5 +14,14 @@ module.exports={
             }
         }
 
+    },
+    chainWebpack: config => {
+        config.plugin('provide').use(webpack.ProvidePlugin, [{
+            $: 'jquery',
+            jquery: 'jquery',
+            jQuery: 'jquery',
+            'window.jQuery': 'jquery'
+        }])
     }
+
 }
