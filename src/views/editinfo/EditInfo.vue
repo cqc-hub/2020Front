@@ -1,12 +1,20 @@
 <template>
     <div id="editinfo">
         <nav-bar class="edit-nav" >
-            <div slot="center" @click="aaa"><b>信息管理</b></div>
+            <div slot="center" ><b>信息管理</b></div>
+            <div slot="right" @click="aaa">收起</div>
+            <div slot="left" @click="showsearch1">
+                <svg  class="bi bi-search" width="1.5em" height="1.5em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                    <path fill-rule="evenodd" d="M10.442 10.442a1 1 0 0 1 1.415 0l3.85 3.85a1 1 0 0 1-1.414 1.415l-3.85-3.85a1 1 0 0 1 0-1.415z" clip-rule="evenodd"/>
+                    <path fill-rule="evenodd" d="M6.5 12a5.5 5.5 0 1 0 0-11 5.5 5.5 0 0 0 0 11zM13 6.5a6.5 6.5 0 1 1-13 0 6.5 6.5 0 0 1 13 0z" clip-rule="evenodd"/>
+                </svg>
+            </div>
         </nav-bar>
         <tab-control :titles="qx"
                      @TabControlClick="TabControlClick"
                      ref="tabControl"
         />
+        <Search-info class="searchinfo" v-show="showsearch" @searchUid="searchUid" @backinfo="backinfo"></Search-info>
         <scroll class="content"
                 @position="scroll_position"
                 ref="scroll"
@@ -14,10 +22,16 @@
                 :pullUpLoad="true"
                 :pull-up-load="true"
                 >
-            <Show-all-swimmer :userAll="userFilter" v-if="this.currentIndex==0"></Show-all-swimmer>
-            <QX v-if="this.currentIndex==1"></QX>
+            <Show-all-swimmer :userAll="userFilter" v-if="this.currentIndex==0 && showsearch111==false"></Show-all-swimmer>
+            <Show-all-swimmer :userAll="userFilter2" v-if="this.currentIndex==0 && showsearch111==true"></Show-all-swimmer>
+            <QX v-if="this.currentIndex==1 && showsearch111==false" :userAll="jiaolianFilter"></QX>
+            <QX v-if="this.currentIndex==1 && showsearch111==true" :userAll="jiaolianFilter1"></QX>
             <hr>
         </scroll>
+        <back-top class="back-top" v-show="isShow"
+                  @click.native="backtop"
+                  :class="{backtopshow:isShow}">
+        </back-top>
     </div>
 </template>
 
@@ -29,12 +43,18 @@
     import TabControl from "components/content/tabcontrol/TabControl";
     import QX from "./chileren/QX";
     import $ from 'jquery'
+    import {backTop} from "@/common/mixin";
+    import SearchInfo from "./chileren/SearchInfo";
     export default {
         name: "EditInfo",
         data(){
             return{
                 userAll:[],
-                currentIndex:0
+                currentIndex:0,
+                showsearch:false,
+                showsearch111:false,
+                userFilter2:[],
+                jiaolianFilter1:[]
 
             }
         },
@@ -43,9 +63,27 @@
             Scroll,
             ShowAllSwimmer,
             TabControl,
-            QX
+            QX,
+            SearchInfo,
+            forSearchInfo:false
         },
+        mixins:[backTop],
         methods:{
+            backinfo(){
+                this.showsearch111=false
+            },
+            searchUid(uid){
+                this.showsearch111=true
+               this.userFilter2=this.userFilter.filter(item=>{
+                    return item.uid==uid
+                })
+               this.jiaolianFilter1=this.jiaolianFilter.filter(item=>{
+                    return item.uid==uid
+                })
+            },
+            showsearch1(){
+                this.showsearch=!this.showsearch
+            },
             aaa(){
                 $(document.querySelectorAll('#showEdit')).slideUp()
                 this.$nextTick(function () {
@@ -55,7 +93,9 @@
             TabControlClick(index){
                 this.currentIndex=index
             },
-            scroll_position(position){},
+            scroll_position(position){
+                this.isShow=position.y<-300
+            },
             showAllUser(){
                 showUserAllInfo().then(res=>{
                     const _this=this
@@ -82,6 +122,11 @@
                     return item.qx<1
                 })
             },
+            jiaolianFilter(){
+                return this.userAll.filter(item=>{
+                    return item.qx==1
+                })
+            },
             qx(){
                return this.$store.state.user.qx==2 ? ['运动员信息管理','用户权限管理'] : ['运动员信息管理']
             }
@@ -90,6 +135,7 @@
 </script>
 
 <style scoped>
+
     #editinfo{
         height: 100vh;
         position: relative;
@@ -100,7 +146,7 @@
         position: relative;
         top: 0;
         /*height: 100vh;*/
-        height: calc(100% - 44px - 49px - 40px);
+        height: calc(100% - 44px - 49px - 40px - 40px);
         overflow: hidden;
     }
     .edit-nav{

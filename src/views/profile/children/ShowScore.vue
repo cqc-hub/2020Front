@@ -25,6 +25,16 @@
             </table>
         </div>
         <div ref="main" id="main"></div>
+        <hr>
+       <div>
+           <div class="lead">教练建议：</div>
+           <br>
+           <div class="container-sm">
+               <p>{{user.bodyhel}}
+               </p>
+           </div>
+       </div>
+        <br><br>
     </div>
 </template>
 
@@ -76,7 +86,10 @@
                         trigger: 'item',
                         formatter: '{b} : {c}分 ({d}%)'
                     },
-
+                    legend:{
+                        bottom:"10%",
+                        right:"7%",
+                    },
                     series: [
                         {
                             name: '成绩(占比)查询',
@@ -87,8 +100,8 @@
                                 }
                             },
                             type: 'pie',
-                            radius: '95%',
-                            center: ['50%', '50%'],
+                            radius: '80%',
+                            center: ['48%', '50%'],
                             data: [
                                 {value: _this.user.score1, name: '项目1'},
                                 {value: _this.user.score2, name: '项目2'},

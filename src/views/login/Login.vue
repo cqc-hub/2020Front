@@ -2,6 +2,11 @@
     <div class="login">
         <nav-bar class="login-nav">
             <div slot="center" >登陆</div>
+            <div slot="left" @click="goback">
+                <svg class="bi bi-chevron-left" width="2em" height="1.5em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                    <path fill-rule="evenodd" d="M11.354 1.646a.5.5 0 0 1 0 .708L5.707 8l5.647 5.646a.5.5 0 0 1-.708.708l-6-6a.5.5 0 0 1 0-.708l6-6a.5.5 0 0 1 .708 0z" clip-rule="evenodd"/>
+                </svg>
+            </div>
         </nav-bar>
 
         <div class="container">
@@ -10,14 +15,14 @@
                     <div class="col-2"></div>
                     <div class="col-3"><label for="uname">用户名:</label></div>
                     <div class="col-7">
-                        <input type="text" class="form-control" v-model="uname" id="uname" ref="uname" @input="saveuname" placeholder="请输入用户名" >
+                        <input type="text" class="form-control" v-model="uname" id="uname" ref="uname" @input="saveuname" placeholder="请输入用户名" @keyup.enter="userSubmit">
                     </div>
                 </div>
                 <div class="row">
                     <div class="col-2"></div>
                     <div class="col-3"> <label for="pwd">密 码:</label></div>
                     <div class="col-7">
-                        <input class="form-control" type="password" v-model="pwd" id="pwd" ref="pwd" @input="savepwd" placeholder="请输入密码">
+                        <input class="form-control" type="password" v-model="pwd" id="pwd" ref="pwd" @input="savepwd" placeholder="请输入密码" @keyup.enter="userSubmit">
                     </div>
                 </div>
                 <div class="row">
@@ -47,6 +52,9 @@
             }
         },
         methods:{
+            goback(){
+                this.$router.go(-1)
+            },
             gouserReg(){
                 this.$router.push('/reg')
             },

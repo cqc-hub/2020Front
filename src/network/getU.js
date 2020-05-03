@@ -125,3 +125,12 @@ export function changeBodyhel(uid,newbodyhel) {
         }
     })
 }
+export function changeQX(uid,newQX) {
+    return request({
+        url: "/changeQX",
+        params:{
+            uid,
+            newQX
+        }
+    })
+}

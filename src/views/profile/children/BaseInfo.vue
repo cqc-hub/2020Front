@@ -21,10 +21,7 @@
                 <th>生日</th>
                 <td>{{user.birth}}</td>
             </tr>
-            <tr >
-                <th>身体情况</th>
-                <td>{{user.bodyhel}}</td>
-            </tr>
+
         </table>
     </div>
 </template>

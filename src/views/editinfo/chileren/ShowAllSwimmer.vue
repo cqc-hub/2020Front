@@ -5,8 +5,9 @@
                     <tr class="table-info">
                     </tr>
                 </table>
-
+                <div v-if="this.isshow">
                 <Swimmer-item v-for="item in userAll" :Swimmer="item"></Swimmer-item>
+                </div>
             </div>
     </div>
 </template>
@@ -29,6 +30,11 @@
         },
         components:{
             SwimmerItem
+        },
+        computed:{
+            isshow(){
+                return Object.keys(this.userAll).length!=0
+            }
         }
 
     }

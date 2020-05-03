@@ -34,7 +34,7 @@
                         <div class="list-group-item">
                             <div class="row">
                                 <div class="col-9">
-                                    <input type="text" class="form-control" placeholder="项目一成绩" v-model="score1">
+                                    <input type="text" ref="score1" class="form-control" placeholder="项目一成绩" v-model="score1">
                                 </div>
                                 <div class="col-3">
                                     <button class="form-control" @click="saveScore1">save</button>
@@ -42,7 +42,7 @@
                             </div>
                             <div class="row">
                                 <div class="col-9">
-                                    <input type="text" class="form-control" placeholder="项目二成绩" v-model="score2">
+                                    <input type="text" ref="score2" class="form-control" placeholder="项目二成绩" v-model="score2">
                                 </div>
                                 <div class="col-3">
                                     <button class="form-control" @click="saveScore2">save</button>
@@ -50,7 +50,7 @@
                             </div>
                             <div class="row">
                                 <div class="col-9">
-                                    <input type="text" class="form-control" placeholder="项目三成绩" v-model="score3">
+                                    <input type="text" ref="score3" class="form-control" placeholder="项目三成绩" v-model="score3">
                                 </div>
                                 <div class="col-3">
                                     <button class="form-control" @click="saveScore3">save</button>
@@ -63,8 +63,8 @@
                         </div>
                         <div class="list-group-item" v-if="this.$store.state.user.qx==2">
                             <li class="list-group-item" @click="showedel"><div class="suojinitem">注销该用户</div></li>
-                            <li class="list-group-item">
-                                <div class="row " ref="deluser">
+                            <li class="list-group-item ">
+                                <div class="row hhhh" ref="deluser">
                                     <div class="col-12">
                                         <button class="btn btn-danger btn-block" @click="delUser">确认注销</button>
                                     </div>
@@ -117,6 +117,8 @@
                     this.$toast.isShow('不能为空',1500)
                 }else{
                     isNaN(this.score1) ? this.$toast.isShow('请输入数字',1500):changeScore1(this.Swimmer.uid,this.score1).then(res=>{
+                        this.$bus.$emit('refreshUsers')
+                        this.$refs.score1.value=''
                         res ? this.$toast.isShow('修改成功',1500) : this.$toast.isShow('修改失败',1500)
                     }).catch(
                         this.$toast.isShow('请输入数字',1500)
@@ -128,6 +130,8 @@
                     this.$toast.isShow('不能为空',1500)
                 }else{
                     isNaN(this.score2) ? this.$toast.isShow('请输入数字',1500):changeScore2(this.Swimmer.uid,this.score2).then(res=>{
+                        this.$bus.$emit('refreshUsers')
+                        this.$refs.score2.value=''
                         res ? this.$toast.isShow('修改成功',1500) : this.$toast.isShow('修改失败',1500)
                     }).catch(
                         this.$toast.isShow('请输入数字',1500)
@@ -139,6 +143,8 @@
                     this.$toast.isShow('不能为空',1500)
                 }else{
                     isNaN(this.score3) ? this.$toast.isShow('请输入数字',1500):changeScore3(this.Swimmer.uid,this.score3).then(res=>{
+                        this.$bus.$emit('refreshUsers')
+                        this.$refs.score3.value=''
                         res ? this.$toast.isShow('修改成功',1500) : this.$toast.isShow('修改失败',1500)
                     }).catch(
                         this.$toast.isShow('请输入数字',1500)
@@ -151,6 +157,7 @@
                 }else{
                     changeBodyhel(this.Swimmer.uid,this.newbodyhel).then(res=>{
                         res ? this.$toast.isShow('修改成功',1500) : this.$toast.isShow('修改失败',1500)
+                        this.$bus.$emit('refreshUsers')
                     })
                 }
             },
