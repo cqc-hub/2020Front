@@ -3,7 +3,7 @@
            <div class="row">
                <div class="col-3 offset-1">{{jl.uid}}</div>
                <div class="col-3 ">{{jl.uname}}</div>
-               <div class="col-5 "><button class="btn btn-warning" @click="removeJL"><span>移除教练身份</span></button></div>
+               <div class="col-5 "> <el-button type="danger" @click="removeJL" size="small" icon="el-icon-delete">移除教练身份</el-button></div>
            </div>
     </div>
 </template>

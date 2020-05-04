@@ -1,9 +1,9 @@
 <template>
     <div id="qx">
-        <div class="removeJL">
-             <Show-all-jiaolian v-for="item in userAll" :jl="item"></Show-all-jiaolian>
-        </div>
 
+        <div class="removeJL">
+             <Show-all-jiaolian v-for="item in userAll" :jl="item" :key="item.uname"></Show-all-jiaolian>
+        </div>
     </div>
 </template>
 
@@ -11,6 +11,10 @@
     import ShowAllJiaolian from "./ShowAllJiaolian";
     export default {
         name: "QX",
+        data() {
+            return {
+            };
+        },
         props:{
             userAll:{
                 type:Array,

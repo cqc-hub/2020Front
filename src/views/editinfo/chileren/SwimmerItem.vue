@@ -73,10 +73,14 @@
                                     </div>
                                 </div>
                             </li>
+                            <li class="list-group-item" @click="newJL" id="newJL">
+                                <i class="el-icon-edit"></i>设为新教练
+                            </li>
                         </div>
                    </div>
                </ul>
                </div>
+
            </div>
         </table>
     </div>
@@ -89,9 +93,9 @@
         changeBodyhel,
         changeScore1,
         changeScore2,
-        changeScore3
+        changeScore3,
+        changeQX
     } from 'network/getU.js'
-
     export default {
         name: "SwimmerItem",
         props:{
@@ -112,6 +116,12 @@
             }
         },
         methods:{
+            newJL(){
+                changeQX(this.Swimmer.uid,1).then(res=>{
+                    this.$toast.isShow('设置新教练成功',1500)
+                    this.$bus.$emit('refreshUsers')
+                }).catch(err=>console.log(err) )
+            },
             saveScore1(){
                 if (this.score1==''){
                     this.$toast.isShow('不能为空',1500)
@@ -199,5 +209,8 @@
     }
     .fff{
         margin-bottom: 7px;
+    }
+    #newJL{
+        color: red;
     }
 </style>

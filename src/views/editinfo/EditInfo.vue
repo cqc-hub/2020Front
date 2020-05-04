@@ -2,9 +2,9 @@
     <div id="editinfo">
         <nav-bar class="edit-nav" >
             <div slot="center" ><b>信息管理</b></div>
-            <div slot="right" @click="aaa">收起</div>
+            <div slot="right" @click="aaa" ><i class="el-icon-thumb"></i>收起</div>
             <div slot="left" @click="showsearch1">
-                <svg  class="bi bi-search" width="1.5em" height="1.5em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                <svg  class="bi bi-search" width="1.5em" height="1.4em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
                     <path fill-rule="evenodd" d="M10.442 10.442a1 1 0 0 1 1.415 0l3.85 3.85a1 1 0 0 1-1.414 1.415l-3.85-3.85a1 1 0 0 1 0-1.415z" clip-rule="evenodd"/>
                     <path fill-rule="evenodd" d="M6.5 12a5.5 5.5 0 1 0 0-11 5.5 5.5 0 0 0 0 11zM13 6.5a6.5 6.5 0 1 1-13 0 6.5 6.5 0 0 1 13 0z" clip-rule="evenodd"/>
                 </svg>
@@ -21,6 +21,7 @@
                 :probe-type="3"
                 :pullUpLoad="true"
                 :pull-up-load="true"
+                @pullingUp="pullingUp"
                 >
             <Show-all-swimmer :userAll="userFilter" v-if="this.currentIndex==0 && showsearch111==false"></Show-all-swimmer>
             <Show-all-swimmer :userAll="userFilter2" v-if="this.currentIndex==0 && showsearch111==true"></Show-all-swimmer>
@@ -45,6 +46,7 @@
     import $ from 'jquery'
     import {backTop} from "@/common/mixin";
     import SearchInfo from "./chileren/SearchInfo";
+    import {debounce} from 'common/utils'
     export default {
         name: "EditInfo",
         data(){
@@ -69,6 +71,12 @@
         },
         mixins:[backTop],
         methods:{
+            pullingUp(){
+                this.$refs.scroll.refresh()
+                this.$nextTick(()=>{
+                    this.$refs.scroll.finishPullUp()
+                })
+            },
             backinfo(){
                 this.showsearch111=false
             },
@@ -130,6 +138,9 @@
             qx(){
                return this.$store.state.user.qx==2 ? ['运动员信息管理','用户权限管理'] : ['运动员信息管理']
             }
+        },
+        created() {
+            this.pullingUp=debounce(this.pullingUp,500)
         }
     }
 </script>
