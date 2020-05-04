@@ -13,12 +13,12 @@
                 :pull-up-load="true"
                 @pullingUp="loadMore">
             <home-swiper :banners="banners" ></home-swiper>
-            <Home-rules></Home-rules>
-            <div class="container">
-                <div>
-                    {{userAll}}
-                    放news什么的
-                </div>
+            <Saishi></Saishi>
+            <div class="container11">
+                <Home-info></Home-info>
+                <Home-rules></Home-rules>
+
+
             </div>
         </scroll>
         <back-top class="back-top" v-show="isShow"
@@ -38,7 +38,8 @@
     import HomeRules from "views/home/childrencomponents/HomeRules";
     import {showLogin} from "common/login";
     import {backTop} from "@/common/mixin";
-
+    import HomeInfo from "./childrencomponents/HomeInfo";
+    import Saishi from "./childrencomponents/Saishi";
     export default {
         name: "Home",
         data(){
@@ -52,7 +53,9 @@
             NavBar,
             Scroll,
             HomeSwiper,
-            HomeRules
+            HomeRules,
+            HomeInfo,
+            Saishi
         },
         mixins:[backTop],
         methods:{
@@ -96,6 +99,16 @@
 </script>
 
 <style scoped>
+    .bisai{
+        width: 100vw;
+        margin-top: 20px;
+        background-color: rgba(0,0,0,.06);
+        text-align: center;
+        font-size: larger;
+        font-weight: bold;
+        line-height: 42px;
+        height: 40px;
+    }
     #home{
         height: 100vh;
         position: relative;
