@@ -7,15 +7,15 @@
                     <td>{{user.uid}}</td>
                 </tr>
                 <tr >
-                    <th>体能测试1</th>
+                    <th>力量测试</th>
                     <td>{{Score1}}</td>
                 </tr>
                 <tr >
-                    <th>体能测试2</th>
+                    <th>爆发力测试</th>
                     <td>{{Score2}}</td>
                 </tr>
                 <tr >
-                    <th>体能测试3</th>
+                    <th>耐力测试</th>
                     <td>{{Score3}}</td>
                 </tr>
                 <tr >
@@ -103,9 +103,9 @@
                             radius: '80%',
                             center: ['48%', '50%'],
                             data: [
-                                {value: _this.user.score1, name: '项目1'},
-                                {value: _this.user.score2, name: '项目2'},
-                                {value: _this.user.score3, name: '项目3'},
+                                {value: _this.user.score1, name: '力量测试'},
+                                {value: _this.user.score2, name: '爆发力测试'},
+                                {value: _this.user.score3, name: '耐力测试'},
                             ].sort(function (a, b) { return a.value - b.value; }),
                             roseType: 'radius',
                             animationType: 'scale',
